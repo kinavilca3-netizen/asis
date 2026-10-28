@@ -3,726 +3,583 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CETPRO SAN PEDRO - Control de Asistencia</title>
-    <!-- Tailwind CSS CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- FontAwesome for Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    fontFamily: {
-                        sans: ['Plus Jakarta Sans', 'sans-serif'],
-                    },
-                    colors: {
-                        brand: {
-                            blue: '#0284c7',
-                            darkBlue: '#0f172a',
-                            gold: '#d97706',
-                            goldLight: '#fef3c7',
-                            accent: '#38bdf8',
-                        }
-                    },
-                    animation: {
-                        'gradient-bg': 'gradientShift 15s ease infinite',
-                        'float': 'float 6s ease-in-out infinite',
-                        'pulse-glow': 'pulseGlow 2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
-                    },
-                    keyframes: {
-                        gradientShift: {
-                            '0%, 100%': { backgroundPosition: '0% 50%' },
-                            '50%': { backgroundPosition: '100% 50%' },
-                        },
-                        float: {
-                            '0%, 100%': { transform: 'translateY(0px)' },
-                            '50%': { transform: 'translateY(-8px)' },
-                        },
-                        pulseGlow: {
-                            '0%, 100%': { opacity: 0.8, filter: 'drop-shadow(0 0 15px rgba(56, 189, 248, 0.6))' },
-                            '50%': { opacity: 1, filter: 'drop-shadow(0 0 25px rgba(217, 119, 6, 0.8))' },
-                        }
-                    }
-                }
-            }
-        }
-    </script>
-
+    <title>CETPRO San Pedro - Control de Asistencia</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <style>
-        /* Animated Gradient Background */
-        body {
-            background: linear-gradient(-45deg, #0b132b, #1c2541, #0f2027, #203a43, #2c5364);
-            background-size: 400% 400%;
-            animation: gradientShift 18s ease infinite;
-            min-height: 100vh;
+        :root {
+            --primary: #0088cc;
+            --primary-dark: #005580;
+            --gold: #d4af37;
+            --gold-light: #f3e5ab;
+            --bg-glass: rgba(15, 23, 42, 0.75);
+            --border-glass: rgba(255, 255, 255, 0.12);
+            --text-light: #f8fafc;
+            --text-muted: #94a3b8;
+            --success: #10b981;
+            --danger: #ef4444;
+            --warning: #f59e0b;
         }
 
-        /* Glassmorphism Styles */
-        .glass-card {
-            background: rgba(255, 255, 255, 0.88);
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+        }
+
+        body {
+            background: #0d1117 url('https://img.magnific.com/vector-gratis/gradiente-formas-geometricas-concepto-fondo-oscuro_23-2148438263.jpg?semt=ais_hybrid&w=740&q=80') no-repeat center center fixed;
+            background-size: cover;
+            color: var(--text-light);
+            min-height: 100vh;
+            padding: 20px 15px;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+        }
+
+        .main-container {
+            width: 100%;
+            max-width: 950px;
+            background: var(--bg-glass);
             backdrop-filter: blur(16px);
             -webkit-backdrop-filter: blur(16px);
-            border: 1px solid rgba(255, 255, 255, 0.4);
+            border: 1px solid var(--border-glass);
+            border-radius: 20px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6), 0 0 30px rgba(0, 136, 204, 0.2);
+            padding: 30px;
+            margin-top: 10px;
+            margin-bottom: 30px;
         }
 
-        .glass-nav {
-            background: rgba(15, 23, 42, 0.75);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
+        header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+            border-bottom: 2px solid rgba(212, 175, 55, 0.3);
+            padding-bottom: 20px;
+            margin-bottom: 25px;
+            text-align: center;
+            flex-wrap: wrap;
+        }
+
+        .logo-img {
+            width: 90px;
+            height: 90px;
+            border-radius: 50%;
+            border: 3px solid var(--gold);
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.5);
+            background: #fff;
+            object-fit: cover;
+        }
+
+        .header-title h1 {
+            font-size: 26px;
+            color: #ffffff;
+            letter-spacing: 1px;
+            text-shadow: 0 2px 10px rgba(0, 136, 204, 0.5);
+        }
+
+        .header-title p {
+            color: var(--gold-light);
+            font-weight: 600;
+            font-size: 14px;
+            letter-spacing: 1.5px;
+            margin-top: 4px;
+        }
+
+        .tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 25px;
+            background: rgba(0, 0, 0, 0.3);
+            padding: 6px;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .tab-btn {
+            flex: 1;
+            padding: 12px 15px;
+            border: none;
+            background: transparent;
+            color: var(--text-muted);
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .tab-btn i {
+            font-size: 16px;
+        }
+
+        .tab-btn:hover {
+            color: var(--text-light);
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .tab-btn.active {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: #ffffff;
+            box-shadow: 0 4px 15px rgba(0, 136, 204, 0.4);
+        }
+
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.4s ease-in-out;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 14px;
+            color: var(--text-light);
+            font-weight: 500;
+        }
+
+        input[type="text"], input[type="date"], select {
+            width: 100%;
+            padding: 12px 15px;
+            background: rgba(15, 23, 42, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            color: #fff;
+            font-size: 15px;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+
+        input[type="text"]:focus, input[type="date"]:focus, select:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 8px rgba(0, 136, 204, 0.5);
+        }
+
+        .btn-submit {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, #10b981, #059669);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+        }
+
+        .btn-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 18px rgba(16, 185, 129, 0.4);
+        }
+
+        .table-responsive {
+            width: 100%;
+            overflow-x: auto;
+            border-radius: 10px;
             border: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(0, 0, 0, 0.2);
         }
 
-        /* Custom Scrollbar */
-        ::-webkit-scrollbar {
-            width: 8px;
-            height: 8px;
-        }
-        ::-webkit-scrollbar-track {
-            background: rgba(15, 23, 42, 0.1);
-            border-radius: 4px;
-        }
-        ::-webkit-scrollbar-thumb {
-            background: rgba(2, 132, 199, 0.5);
-            border-radius: 4px;
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background: rgba(2, 132, 199, 0.8);
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
         }
 
-        /* Toast notification animation */
-        .toast-enter {
-            transform: translateY(-100%);
-            opacity: 0;
+        th {
+            background: rgba(0, 136, 204, 0.3);
+            color: #ffffff;
+            padding: 14px 16px;
+            font-size: 14px;
+            font-weight: 600;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
-        .toast-show {
-            transform: translateY(0);
-            opacity: 1;
+
+        td {
+            padding: 12px 16px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            font-size: 14px;
+        }
+
+        tr:nth-child(even) {
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        .badge {
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+            display: inline-block;
+        }
+        .badge-presente { background: rgba(16, 185, 129, 0.2); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.4); }
+        .badge-ausente { background: rgba(239, 68, 68, 0.2); color: #f87171; border: 1px solid rgba(239, 68, 68, 0.4); }
+        .badge-tardanza { background: rgba(245, 158, 11, 0.2); color: #fbbf24; border: 1px solid rgba(245, 158, 11, 0.4); }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .stat-card {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid var(--border-glass);
+            border-radius: 10px;
+            padding: 15px;
+            text-align: center;
+        }
+
+        .stat-card h4 {
+            color: var(--text-muted);
+            font-size: 13px;
+            margin-bottom: 5px;
+        }
+
+        .stat-card span {
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        .empty-msg {
+            text-align: center;
+            padding: 25px;
+            color: var(--text-muted);
+            font-style: italic;
+        }
+
+        @media (max-width: 600px) {
+            .tabs {
+                flex-direction: column;
+            }
+            .header-title h1 {
+                font-size: 20px;
+            }
         }
     </style>
 </head>
-<body class="font-sans text-slate-800 antialiased relative overflow-x-hidden p-3 md:p-6 min-h-screen flex flex-col justify-between">
+<body>
 
-    <!-- Glowing Background Decorative Elements -->
-    <div class="fixed top-10 left-10 w-72 h-72 bg-blue-500/20 rounded-full blur-3xl pointer-events-none"></div>
-    <div class="fixed bottom-10 right-10 w-96 h-96 bg-amber-500/15 rounded-full blur-3xl pointer-events-none"></div>
+<div class="main-container">
+    <header>
+        <img src="image_4fde9f.jpg" alt="CETPRO San Pedro Logo" class="logo-img">
+        <div class="header-title">
+            <h1>CETPRO SAN PEDRO</h1>
+            <p>APLAO - CASTILLA | R.D. 2025</p>
+        </div>
+    </header>
 
-    <!-- Notification Toast Container -->
-    <div id="toast" class="fixed top-5 right-5 z-50 transform transition-all duration-300 ease-out toast-enter hidden">
-        <div id="toastContent" class="flex items-center gap-3 px-5 py-4 rounded-xl shadow-2xl text-white font-medium text-sm">
-            <i id="toastIcon" class="fas fa-check-circle text-lg"></i>
-            <span id="toastMessage">Acción completada con éxito</span>
+    <div class="tabs">
+        <button class="tab-btn active" onclick="showTab('registrar', this)">
+            <i class="fa-solid fa-user-plus"></i> Registrar Estudiante
+        </button>
+        <button class="tab-btn" onclick="showTab('marcar', this)">
+            <i class="fa-solid fa-clipboard-user"></i> Marcar Asistencia
+        </button>
+        <button class="tab-btn" onclick="showTab('ver', this)">
+            <i class="fa-solid fa-list-check"></i> Ver Listado
+        </button>
+    </div>
+
+    <!-- SECCIÓN 1: Registrar Estudiante -->
+    <div id="registrar" class="tab-content active">
+        <form id="studentForm">
+            <div class="form-group">
+                <label for="studentId"><i class="fa-solid fa-id-card"></i> DNI / Código de Estudiante:</label>
+                <input type="text" id="studentId" required placeholder="Ej: 71234567">
+            </div>
+            <div class="form-group">
+                <label for="studentName"><i class="fa-solid fa-user"></i> Nombre Completo:</label>
+                <input type="text" id="studentName" required placeholder="Ej: Juan Carlos Pérez">
+            </div>
+            <button type="submit" class="btn-submit">
+                <i class="fa-solid fa-floppy-disk"></i> Guardar Estudiante
+            </button>
+        </form>
+
+        <br>
+        <h3 style="margin-bottom: 12px; font-size: 16px;"><i class="fa-solid fa-users"></i> Estudiantes Registrados</h3>
+        <div class="table-responsive">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Código</th>
+                        <th>Nombre Completo</th>
+                        <th style="width: 80px; text-align: center;">Acción</th>
+                    </tr>
+                </thead>
+                <tbody id="registeredStudentsList">
+                    <!-- Se cargan dinámicamente -->
+                </tbody>
+            </table>
         </div>
     </div>
 
-    <!-- Main Outer Container -->
-    <div class="max-w-5xl mx-auto w-full relative z-10 flex-grow">
-        
-        <!-- Header Section with Institution Logo and Title -->
-        <header class="text-center mb-8 flex flex-col items-center">
-            <!-- Insignia / Logo Wrapper -->
-            <div class="relative group mb-4">
-                <div class="absolute -inset-1 bg-gradient-to-r from-amber-400 via-sky-400 to-amber-500 rounded-full blur-md opacity-75 group-hover:opacity-100 transition duration-1000 group-hover:duration-200 animate-pulse-glow"></div>
-                <div class="relative w-28 h-28 md:w-36 md:h-36 rounded-full bg-white p-1.5 shadow-2xl border-2 border-amber-400 flex items-center justify-center overflow-hidden">
-                    <img id="institutionLogo" src="input_file_0.png" alt="CETPRO SAN PEDRO Logo" class="w-full h-full object-contain rounded-full transition-transform duration-500 group-hover:scale-105" onerror="this.src='https://placehold.co/150x150/0284c7/ffffff?text=CETPRO+SAN+PEDRO'">
-                </div>
-            </div>
+    <!-- SECCIÓN 2: Marcar Asistencia -->
+    <div id="marcar" class="tab-content">
+        <div class="form-group">
+            <label for="attendanceDate"><i class="fa-solid fa-calendar-day"></i> Seleccionar Fecha:</label>
+            <input type="date" id="attendanceDate">
+        </div>
 
-            <!-- Header Titles -->
-            <h1 class="text-3xl md:text-5xl font-extrabold text-white tracking-tight drop-shadow-md flex items-center justify-center gap-2">
-                <span>CETPRO SAN PEDRO</span>
-            </h1>
-            <p class="text-sky-200 text-sm md:text-base font-semibold tracking-wide uppercase mt-1 drop-shadow">
-                <i class="fas fa-map-marker-alt text-amber-400 mr-1.5"></i>Aplao - Castilla | RD. 2025
-            </p>
-            <div class="mt-2 inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-900/60 backdrop-blur-md border border-sky-400/30 text-xs font-medium text-sky-300 shadow-inner">
-                <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
-                Sistema Integrado de Control de Asistencia
+        <form id="markForm">
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Código</th>
+                            <th>Estudiante</th>
+                            <th>Estado de Asistencia</th>
+                        </tr>
+                    </thead>
+                    <tbody id="markTableBody">
+                        <!-- Estudiantes para marcar lista -->
+                    </tbody>
+                </table>
             </div>
-        </header>
-
-        <!-- Main Navigation Bar -->
-        <nav class="glass-nav p-1.5 rounded-2xl shadow-2xl mb-8 flex flex-col sm:flex-row gap-1.5 border border-white/10">
-            <button onclick="switchTab('registrar')" id="tab-registrar" class="nav-tab flex-1 flex items-center justify-center gap-2 py-3 px-4 rounded-xl text-sm font-bold transition-all duration-300 text-slate-300 hover:text-white hover:bg-white/10">
-                <i class="fas fa-user-plus text-amber-400 text-base"></i>
-                <span>Registrar Estudiante</span>
+            <br>
+            <button type="submit" class="btn-submit">
+                <i class="fa-solid fa-check-double"></i> Guardar Asistencia del Día
             </button>
-            <button onclick="switchTab('marcar')" id="tab-marcar" class="nav-tab flex-1 flex items-center justify-center gap-2 py-3 px-4 rounded-xl text-sm font-bold transition-all duration-300 text-slate-300 hover:text-white hover:bg-white/10">
-                <i class="fas fa-calendar-check text-sky-400 text-base"></i>
-                <span>Marcar Asistencia</span>
-            </button>
-            <button onclick="switchTab('ver')" id="tab-ver" class="nav-tab flex-1 flex items-center justify-center gap-2 py-3 px-4 rounded-xl text-sm font-bold transition-all duration-300 text-slate-300 hover:text-white hover:bg-white/10">
-                <i class="fas fa-chart-line text-emerald-400 text-base"></i>
-                <span>Ver Listado & Stats</span>
-            </button>
-        </nav>
-
-        <!-- TAB CONTENT 1: REGISTRAR ESTUDIANTE -->
-        <section id="content-registrar" class="tab-content hidden">
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
-                <!-- Registration Form Card -->
-                <div class="lg:col-span-5 glass-card rounded-2xl p-6 shadow-2xl border border-white/50 flex flex-col justify-between">
-                    <div>
-                        <div class="flex items-center gap-3 pb-4 mb-5 border-b border-slate-200">
-                            <div class="w-10 h-10 rounded-xl bg-amber-500/10 border border-amber-500/30 flex items-center justify-center text-amber-600">
-                                <i class="fas fa-id-card text-xl"></i>
-                            </div>
-                            <div>
-                                <h2 class="text-xl font-bold text-slate-800">Nuevo Estudiante</h2>
-                                <p class="text-xs text-slate-500">Ingrese los datos institucionales</p>
-                            </div>
-                        </div>
-
-                        <form id="studentForm" onsubmit="handleRegisterStudent(event)" class="space-y-4">
-                            <div>
-                                <label for="studentId" class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1.5">Código / DNI</label>
-                                <div class="relative">
-                                    <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
-                                        <i class="fas fa-hashtag"></i>
-                                    </div>
-                                    <input type="text" id="studentId" required placeholder="Ej: DNI 74839201" class="w-full pl-10 pr-4 py-2.5 bg-white/80 border border-slate-300 rounded-xl focus:ring-2 focus:ring-amber-500 focus:border-amber-500 text-sm font-medium transition-all outline-none">
-                                </div>
-                            </div>
-
-                            <div>
-                                <label for="studentName" class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1.5">Nombre Completo</label>
-                                <div class="relative">
-                                    <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
-                                        <i class="fas fa-user"></i>
-                                    </div>
-                                    <input type="text" id="studentName" required placeholder="Ej: María Elena Quispe" class="w-full pl-10 pr-4 py-2.5 bg-white/80 border border-slate-300 rounded-xl focus:ring-2 focus:ring-amber-500 focus:border-amber-500 text-sm font-medium transition-all outline-none">
-                                </div>
-                            </div>
-
-                            <button type="submit" class="w-full mt-2 py-3 px-4 bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-white font-bold rounded-xl shadow-lg shadow-amber-500/20 active:scale-[0.99] transition-all flex items-center justify-center gap-2">
-                                <i class="fas fa-save"></i>
-                                <span>Guardar Estudiante</span>
-                            </button>
-                        </form>
-                    </div>
-
-                    <div class="mt-6 p-4 rounded-xl bg-amber-500/10 border border-amber-500/20 text-amber-900 text-xs flex items-start gap-2.5">
-                        <i class="fas fa-info-circle text-amber-600 text-base mt-0.5"></i>
-                        <span>Los estudiantes registrados podrán ser evaluados inmediatamente en la toma de lista diaria.</span>
-                    </div>
-                </div>
-
-                <!-- Students Registered List Table -->
-                <div class="lg:col-span-7 glass-card rounded-2xl p-6 shadow-2xl border border-white/50 flex flex-col">
-                    <div class="flex items-center justify-between pb-4 mb-4 border-b border-slate-200">
-                        <div class="flex items-center gap-3">
-                            <div class="w-10 h-10 rounded-xl bg-sky-500/10 border border-sky-500/30 flex items-center justify-center text-sky-600">
-                                <i class="fas fa-users text-xl"></i>
-                            </div>
-                            <div>
-                                <h2 class="text-xl font-bold text-slate-800">Estudiantes Registrados</h2>
-                                <p class="text-xs text-slate-500">Matrícula vigente CETPRO San Pedro</p>
-                            </div>
-                        </div>
-                        <span id="studentCountBadge" class="px-3 py-1 bg-sky-100 text-sky-800 text-xs font-extrabold rounded-full border border-sky-300">
-                            0 Estudiantes
-                        </span>
-                    </div>
-
-                    <!-- Table wrapper -->
-                    <div class="overflow-x-auto flex-grow max-h-[380px] overflow-y-auto pr-1">
-                        <table class="w-full text-left border-collapse">
-                            <thead class="sticky top-0 bg-slate-100/90 backdrop-blur text-xs font-bold text-slate-600 uppercase tracking-wider border-b border-slate-200 z-10">
-                                <tr>
-                                    <th class="py-3 px-4">Código / DNI</th>
-                                    <th class="py-3 px-4">Estudiante</th>
-                                    <th class="py-3 px-4 text-center">Acciones</th>
-                                </tr>
-                            </thead>
-                            <tbody id="registeredStudentsTbody" class="divide-y divide-slate-200/70 text-sm font-medium">
-                                <!-- Dynamic rows -->
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- TAB CONTENT 2: MARCAR ASISTENCIA -->
-        <section id="content-marcar" class="tab-content hidden">
-            <div class="glass-card rounded-2xl p-6 shadow-2xl border border-white/50">
-                
-                <!-- Controls Header -->
-                <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 pb-6 mb-6 border-b border-slate-200">
-                    <div class="flex items-center gap-3">
-                        <div class="w-10 h-10 rounded-xl bg-sky-500/10 border border-sky-500/30 flex items-center justify-center text-sky-600">
-                            <i class="fas fa-clipboard-user text-xl"></i>
-                        </div>
-                        <div>
-                            <h2 class="text-xl font-bold text-slate-800">Toma de Asistencia</h2>
-                            <p class="text-xs text-slate-500">Seleccione la fecha y evalúe a los alumnos</p>
-                        </div>
-                    </div>
-
-                    <!-- Date picker & Quick fill -->
-                    <div class="flex flex-wrap items-center gap-3 w-full md:w-auto">
-                        <div class="flex items-center gap-2 bg-white/80 border border-slate-300 rounded-xl px-3 py-1.5 shadow-sm">
-                            <i class="far fa-calendar-alt text-sky-600"></i>
-                            <input type="date" id="markDateInput" onchange="loadAttendanceForDate()" class="bg-transparent font-bold text-slate-800 text-sm outline-none cursor-pointer">
-                        </div>
-                        <button type="button" onclick="quickSetAll('Presente')" class="px-3 py-2 bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-700 border border-emerald-500/30 rounded-xl text-xs font-bold transition flex items-center gap-1.5">
-                            <i class="fas fa-check-double"></i> Todos Presentes
-                        </button>
-                    </div>
-                </div>
-
-                <!-- Form to submit attendance -->
-                <form id="markForm" onsubmit="handleSaveAttendance(event)">
-                    <div class="overflow-x-auto max-h-[450px] overflow-y-auto mb-6 pr-1">
-                        <table class="w-full text-left border-collapse">
-                            <thead class="sticky top-0 bg-slate-100/90 backdrop-blur text-xs font-bold text-slate-600 uppercase tracking-wider border-b border-slate-200 z-10">
-                                <tr>
-                                    <th class="py-3 px-4">DNI / Código</th>
-                                    <th class="py-3 px-4">Estudiante</th>
-                                    <th class="py-3 px-4 text-center">Estado de Asistencia</th>
-                                </tr>
-                            </thead>
-                            <tbody id="markAttendanceTbody" class="divide-y divide-slate-200/70 text-sm font-medium">
-                                <!-- Dynamic rows -->
-                            </tbody>
-                        </table>
-                    </div>
-
-                    <div class="flex items-center justify-between pt-4 border-t border-slate-200">
-                        <span class="text-xs text-slate-500 font-medium">
-                            <i class="fas fa-shield-alt text-sky-600 mr-1"></i> CETPRO San Pedro Registro Oficial
-                        </span>
-                        <button type="submit" class="py-3 px-8 bg-gradient-to-r from-sky-600 to-blue-700 hover:from-sky-700 hover:to-blue-800 text-white font-bold rounded-xl shadow-lg shadow-sky-600/30 active:scale-[0.99] transition flex items-center gap-2">
-                            <i class="fas fa-cloud-upload-alt text-lg"></i>
-                            <span>Guardar Asistencia del Día</span>
-                        </button>
-                    </div>
-                </form>
-            </div>
-        </section>
-
-        <!-- TAB CONTENT 3: VER LISTADO & STATS -->
-        <section id="content-ver" class="tab-content hidden">
-            <!-- Stats Dashboard Bar -->
-            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6">
-                <div class="glass-card p-4 rounded-2xl shadow-lg border border-emerald-200/50 flex items-center gap-4">
-                    <div class="w-12 h-12 rounded-2xl bg-emerald-500 text-white flex items-center justify-center text-2xl shadow-lg shadow-emerald-500/30">
-                        <i class="fas fa-user-check"></i>
-                    </div>
-                    <div>
-                        <p class="text-xs font-bold text-slate-500 uppercase tracking-wider">Presentes</p>
-                        <h3 id="statPresent" class="text-2xl font-black text-emerald-600">0</h3>
-                    </div>
-                </div>
-
-                <div class="glass-card p-4 rounded-2xl shadow-lg border border-amber-200/50 flex items-center gap-4">
-                    <div class="w-12 h-12 rounded-2xl bg-amber-500 text-white flex items-center justify-center text-2xl shadow-lg shadow-amber-500/30">
-                        <i class="fas fa-user-clock"></i>
-                    </div>
-                    <div>
-                        <p class="text-xs font-bold text-slate-500 uppercase tracking-wider">Tardanzas</p>
-                        <h3 id="statLate" class="text-2xl font-black text-amber-600">0</h3>
-                    </div>
-                </div>
-
-                <div class="glass-card p-4 rounded-2xl shadow-lg border border-rose-200/50 flex items-center gap-4">
-                    <div class="w-12 h-12 rounded-2xl bg-rose-500 text-white flex items-center justify-center text-2xl shadow-lg shadow-rose-500/30">
-                        <i class="fas fa-user-times"></i>
-                    </div>
-                    <div>
-                        <p class="text-xs font-bold text-slate-500 uppercase tracking-wider">Ausentes</p>
-                        <h3 id="statAbsent" class="text-2xl font-black text-rose-600">0</h3>
-                    </div>
-                </div>
-            </div>
-
-            <!-- History Main Card -->
-            <div class="glass-card rounded-2xl p-6 shadow-2xl border border-white/50">
-                <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pb-6 mb-6 border-b border-slate-200">
-                    <div class="flex items-center gap-3">
-                        <div class="w-10 h-10 rounded-xl bg-purple-500/10 border border-purple-500/30 flex items-center justify-center text-purple-600">
-                            <i class="fas fa-history text-xl"></i>
-                        </div>
-                        <div>
-                            <h2 class="text-xl font-bold text-slate-800">Historial y Reporte</h2>
-                            <p class="text-xs text-slate-500">Consulta los datos guardados en la plataforma</p>
-                        </div>
-                    </div>
-
-                    <div class="flex items-center gap-2 bg-white/80 border border-slate-300 rounded-xl px-3 py-1.5 shadow-sm w-full sm:w-auto">
-                        <i class="fas fa-filter text-purple-600 text-xs"></i>
-                        <span class="text-xs font-bold text-slate-600">Fecha:</span>
-                        <input type="date" id="historyDateInput" onchange="renderHistoryTable()" class="bg-transparent font-bold text-slate-800 text-sm outline-none cursor-pointer flex-grow">
-                    </div>
-                </div>
-
-                <!-- History Table -->
-                <div class="overflow-x-auto max-h-[400px] overflow-y-auto pr-1">
-                    <table class="w-full text-left border-collapse">
-                        <thead class="sticky top-0 bg-slate-100/90 backdrop-blur text-xs font-bold text-slate-600 uppercase tracking-wider border-b border-slate-200 z-10">
-                            <tr>
-                                <th class="py-3 px-4">Código / DNI</th>
-                                <th class="py-3 px-4">Estudiante</th>
-                                <th class="py-3 px-4 text-center">Estado Registrado</th>
-                            </tr>
-                        </thead>
-                        <tbody id="historyTbody" class="divide-y divide-slate-200/70 text-sm font-medium">
-                            <!-- Dynamic rows -->
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </section>
-
+        </form>
     </div>
 
-    <!-- Footer -->
-    <footer class="mt-8 text-center text-sky-200/70 text-xs font-medium py-3 border-t border-white/10 relative z-10">
-        <p>© 2025 CETPRO SAN PEDRO - Aplao, Castilla. Todos los derechos reservados.</p>
-    </footer>
+    <!-- SECCIÓN 3: Ver Listado -->
+    <div id="ver" class="tab-content">
+        <div class="form-group">
+            <label for="filterDate"><i class="fa-solid fa-filter"></i> Consultar Fecha:</label>
+            <input type="date" id="filterDate" onchange="renderHistory()">
+        </div>
 
-    <!-- JavaScript Application Logic -->
-    <script>
-        // Sample Initial Seed Data if local Storage is empty
-        const INITIAL_STUDENTS = [
-            { id: "72849102", name: "Carlos Alberto Mendoza Rivera" },
-            { id: "74920182", name: "Ana Lucía Benavente Condori" },
-            { id: "71029384", name: "Jorge Luis Huamaní Zúñiga" },
-            { id: "76543210", name: "Valeria Sofia Castillo Vargas" }
-        ];
+        <div class="stats-grid">
+            <div class="stat-card">
+                <h4>Presentes</h4>
+                <span id="statPresente" style="color: var(--success)">0</span>
+            </div>
+            <div class="stat-card">
+                <h4>Tardanzas</h4>
+                <span id="statTardanza" style="color: var(--warning)">0</span>
+            </div>
+            <div class="stat-card">
+                <h4>Ausentes</h4>
+                <span id="statAusente" style="color: var(--danger)">0</span>
+            </div>
+        </div>
 
-        // Global State Variables
-        let students = [];
-        let attendanceRecords = {};
+        <div class="table-responsive">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Código</th>
+                        <th>Estudiante</th>
+                        <th>Estado</th>
+                    </tr>
+                </thead>
+                <tbody id="historyTableBody">
+                    <!-- Registros del día consultado -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
 
-        // DOM Content Loaded Initializer
-        document.addEventListener('DOMContentLoaded', () => {
-            // Set default date inputs to today
-            const todayStr = new Date().toISOString().split('T')[0];
-            document.getElementById('markDateInput').value = todayStr;
-            document.getElementById('historyDateInput').value = todayStr;
+<script>
+    // Configurar fechas iniciales
+    const today = new Date().toISOString().split('T')[0];
+    document.getElementById('attendanceDate').value = today;
+    document.getElementById('filterDate').value = today;
 
-            // Load data from LocalStorage or seed defaults
-            loadStorageData();
+    // Almacenamiento Local
+    let students = JSON.parse(localStorage.getItem('cetpro_students')) || [];
+    let attendanceRecords = JSON.parse(localStorage.getItem('cetpro_attendance')) || {};
 
-            // Render default initial tab
-            switchTab('registrar');
+    // Cambiar de Pestaña
+    function showTab(tabId, btn) {
+        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+        document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+
+        document.getElementById(tabId).classList.add('active');
+        btn.classList.add('active');
+
+        if (tabId === 'registrar') renderRegisteredStudents();
+        if (tabId === 'marcar') renderMarkTable();
+        if (tabId === 'ver') renderHistory();
+    }
+
+    // Guardar Estudiante
+    document.getElementById('studentForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        const id = document.getElementById('studentId').value.trim();
+        const name = document.getElementById('studentName').value.trim();
+
+        if (students.some(s => s.id === id)) {
+            alert('El código/DNI ya está registrado.');
+            return;
+        }
+
+        students.push({ id, name });
+        localStorage.setItem('cetpro_students', JSON.stringify(students));
+        this.reset();
+        renderRegisteredStudents();
+        alert('Estudiante registrado correctamente.');
+    });
+
+    // Renderizar estudiantes en módulo de registro
+    function renderRegisteredStudents() {
+        const tbody = document.getElementById('registeredStudentsList');
+        tbody.innerHTML = '';
+
+        if (students.length === 0) {
+            tbody.innerHTML = '<tr><td colspan="3" class="empty-msg">No hay estudiantes registrados.</td></tr>';
+            return;
+        }
+
+        students.forEach((student, index) => {
+            const tr = document.createElement('tr');
+            tr.innerHTML = `
+                <td>${student.id}</td>
+                <td>${student.name}</td>
+                <td style="text-align: center;">
+                    <button onclick="deleteStudent(${index})" style="background:none; border:none; color:var(--danger); cursor:pointer;">
+                        <i class="fa-solid fa-trash"></i>
+                    </button>
+                </td>
+            `;
+            tbody.appendChild(tr);
+        });
+    }
+
+    // Eliminar estudiante
+    function deleteStudent(index) {
+        if (confirm('¿Deseas eliminar a este estudiante?')) {
+            students.splice(index, 1);
+            localStorage.setItem('cetpro_students', JSON.stringify(students));
+            renderRegisteredStudents();
+        }
+    }
+
+    // Cargar tabla de marcar asistencia
+    function renderMarkTable() {
+        const tbody = document.getElementById('markTableBody');
+        tbody.innerHTML = '';
+
+        if (students.length === 0) {
+            tbody.innerHTML = '<tr><td colspan="3" class="empty-msg">Primero debes registrar estudiantes.</td></tr>';
+            return;
+        }
+
+        students.forEach(student => {
+            const tr = document.createElement('tr');
+            tr.innerHTML = `
+                <td>${student.id}</td>
+                <td>${student.name}</td>
+                <td>
+                    <select name="status_${student.id}">
+                        <option value="Presente">Presente</option>
+                        <option value="Tardanza">Tardanza</option>
+                        <option value="Ausente">Ausente</option>
+                    </select>
+                </td>
+            `;
+            tbody.appendChild(tr);
+        });
+    }
+
+    // Guardar Asistencia
+    document.getElementById('markForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        const date = document.getElementById('attendanceDate').value;
+
+        if (!date) {
+            alert('Selecciona una fecha válida.');
+            return;
+        }
+
+        if (students.length === 0) {
+            alert('No hay estudiantes para marcar asistencia.');
+            return;
+        }
+
+        const dailyRecord = students.map(student => {
+            const select = document.querySelector(`select[name="status_${student.id}"]`);
+            return {
+                id: student.id,
+                name: student.name,
+                status: select ? select.value : 'Presente'
+            };
         });
 
-        // Local Storage Management
-        function loadStorageData() {
-            const savedStudents = localStorage.getItem('cetpro_students');
-            if (savedStudents) {
-                try {
-                    students = JSON.parse(savedStudents);
-                } catch(e) {
-                    students = INITIAL_STUDENTS;
-                }
-            } else {
-                students = INITIAL_STUDENTS;
-                saveStudentsToStorage();
-            }
+        attendanceRecords[date] = dailyRecord;
+        localStorage.setItem('cetpro_attendance', JSON.stringify(attendanceRecords));
+        alert(`Asistencia guardada para la fecha ${date}`);
+    });
 
-            const savedAttendance = localStorage.getItem('cetpro_attendance');
-            if (savedAttendance) {
-                try {
-                    attendanceRecords = JSON.parse(savedAttendance);
-                } catch(e) {
-                    attendanceRecords = {};
-                }
-            }
-        }
+    // Renderizar historial y estadísticas
+    function renderHistory() {
+        const date = document.getElementById('filterDate').value;
+        const tbody = document.getElementById('historyTableBody');
+        tbody.innerHTML = '';
 
-        function saveStudentsToStorage() {
-            localStorage.setItem('cetpro_students', JSON.stringify(students));
-        }
+        const record = attendanceRecords[date];
 
-        function saveAttendanceToStorage() {
-            localStorage.setItem('cetpro_attendance', JSON.stringify(attendanceRecords));
-        }
+        let pCount = 0, tCount = 0, aCount = 0;
 
-        // Navigation Tab Switcher
-        function switchTab(tabKey) {
-            // Hide all tab contents
-            document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+        if (!record || record.length === 0) {
+            tbody.innerHTML = '<tr><td colspan="3" class="empty-msg">Sin registros de asistencia para esta fecha.</td></tr>';
+        } else {
+            record.forEach(item => {
+                if (item.status === 'Presente') pCount++;
+                if (item.status === 'Tardanza') tCount++;
+                if (item.status === 'Ausente') aCount++;
 
-            // Reset tab button styles
-            document.querySelectorAll('.nav-tab').forEach(btn => {
-                btn.classList.remove('bg-amber-500', 'text-white', 'shadow-lg', 'bg-sky-600');
-                btn.classList.add('text-slate-300');
-            });
+                let badgeClass = 'badge-presente';
+                if (item.status === 'Ausente') badgeClass = 'badge-ausente';
+                if (item.status === 'Tardanza') badgeClass = 'badge-tardanza';
 
-            // Activate chosen tab content
-            const activeContent = document.getElementById(`content-${tabKey}`);
-            if (activeContent) activeContent.classList.remove('hidden');
-
-            // Style chosen tab button
-            const activeBtn = document.getElementById(`tab-${tabKey}`);
-            if (activeBtn) {
-                activeBtn.classList.remove('text-slate-300');
-                if (tabKey === 'registrar') {
-                    activeBtn.classList.add('bg-amber-500', 'text-white', 'shadow-lg');
-                } else if (tabKey === 'marcar') {
-                    activeBtn.classList.add('bg-sky-600', 'text-white', 'shadow-lg');
-                } else {
-                    activeBtn.classList.add('bg-purple-600', 'text-white', 'shadow-lg');
-                }
-            }
-
-            // Render view dynamic content
-            if (tabKey === 'registrar') renderRegisteredStudentsTable();
-            if (tabKey === 'marcar') loadAttendanceForDate();
-            if (tabKey === 'ver') renderHistoryTable();
-        }
-
-        // Toast Notification System
-        function showToast(message, type = 'success') {
-            const toast = document.getElementById('toast');
-            const toastContent = document.getElementById('toastContent');
-            const toastIcon = document.getElementById('toastIcon');
-            const toastMessage = document.getElementById('toastMessage');
-
-            toastMessage.textContent = message;
-
-            if (type === 'success') {
-                toastContent.className = "flex items-center gap-3 px-5 py-4 rounded-xl shadow-2xl text-white font-medium text-sm bg-gradient-to-r from-emerald-600 to-teal-700";
-                toastIcon.className = "fas fa-check-circle text-lg";
-            } else if (type === 'danger') {
-                toastContent.className = "flex items-center gap-3 px-5 py-4 rounded-xl shadow-2xl text-white font-medium text-sm bg-gradient-to-r from-rose-600 to-red-700";
-                toastIcon.className = "fas fa-exclamation-circle text-lg";
-            } else {
-                toastContent.className = "flex items-center gap-3 px-5 py-4 rounded-xl shadow-2xl text-white font-medium text-sm bg-gradient-to-r from-amber-500 to-amber-700";
-                toastIcon.className = "fas fa-info-circle text-lg";
-            }
-
-            toast.classList.remove('hidden', 'toast-enter');
-            toast.classList.add('toast-show');
-
-            setTimeout(() => {
-                toast.classList.remove('toast-show');
-                toast.classList.add('toast-enter');
-                setTimeout(() => toast.classList.add('hidden'), 300);
-            }, 3000);
-        }
-
-        // --- 1. REGISTRAR ESTUDIANTE SECTION ---
-        function handleRegisterStudent(e) {
-            e.preventDefault();
-            const idInput = document.getElementById('studentId');
-            const nameInput = document.getElementById('studentName');
-
-            const id = idInput.value.trim();
-            const name = nameInput.value.trim();
-
-            if (!id || !name) {
-                showToast('Por favor completa todos los campos.', 'warning');
-                return;
-            }
-
-            // Duplicate ID Check
-            if (students.some(s => s.id.toLowerCase() === id.toLowerCase())) {
-                showToast('Ya existe un estudiante registrado con este DNI/Código.', 'danger');
-                return;
-            }
-
-            students.push({ id, name });
-            saveStudentsToStorage();
-
-            idInput.value = '';
-            nameInput.value = '';
-
-            renderRegisteredStudentsTable();
-            showToast('Estudiante registrado exitosamente', 'success');
-        }
-
-        function deleteStudent(id) {
-            if (confirm(`¿Está seguro de eliminar el estudiante con código ${id}?`)) {
-                students = students.filter(s => s.id !== id);
-                saveStudentsToStorage();
-                renderRegisteredStudentsTable();
-                showToast('Estudiante eliminado correctamente', 'info');
-            }
-        }
-
-        function renderRegisteredStudentsTable() {
-            const tbody = document.getElementById('registeredStudentsTbody');
-            const badge = document.getElementById('studentCountBadge');
-            
-            badge.textContent = `${students.length} Estudiante${students.length !== 1 ? 's' : ''}`;
-            tbody.innerHTML = '';
-
-            if (students.length === 0) {
-                tbody.innerHTML = `
-                    <tr>
-                        <td colspan="3" class="py-8 text-center text-slate-400 font-medium">
-                            <i class="fas fa-users-slash text-3xl mb-2 block"></i>
-                            No hay estudiantes registrados.
-                        </td>
-                    </tr>
-                `;
-                return;
-            }
-
-            students.forEach((student) => {
                 const tr = document.createElement('tr');
-                tr.className = "hover:bg-slate-50/80 transition-colors";
                 tr.innerHTML = `
-                    <td class="py-3 px-4 font-mono text-slate-700 font-bold">${student.id}</td>
-                    <td class="py-3 px-4 text-slate-900 font-semibold">${student.name}</td>
-                    <td class="py-3 px-4 text-center">
-                        <button onclick="deleteStudent('${student.id}')" class="w-8 h-8 rounded-lg bg-rose-50 text-rose-600 hover:bg-rose-600 hover:text-white transition-all flex items-center justify-center mx-auto" title="Eliminar registro">
-                            <i class="fas fa-trash-alt text-xs"></i>
-                        </button>
-                    </td>
+                    <td>${item.id}</td>
+                    <td>${item.name}</td>
+                    <td><span class="badge ${badgeClass}">${item.status}</span></td>
                 `;
                 tbody.appendChild(tr);
             });
         }
 
-        // --- 2. MARCAR ASISTENCIA SECTION ---
-        function loadAttendanceForDate() {
-            const date = document.getElementById('markDateInput').value;
-            const tbody = document.getElementById('markAttendanceTbody');
-            tbody.innerHTML = '';
+        document.getElementById('statPresente').textContent = pCount;
+        document.getElementById('statTardanza').textContent = tCount;
+        document.getElementById('statAusente').textContent = aCount;
+    }
 
-            if (students.length === 0) {
-                tbody.innerHTML = `
-                    <tr>
-                        <td colspan="3" class="py-8 text-center text-slate-400 font-medium">
-                            No hay estudiantes registrados en la lista. Primero añade algunos.
-                        </td>
-                    </tr>
-                `;
-                return;
-            }
+    // Inicializar lista
+    renderRegisteredStudents();
+</script>
 
-            const existingRecord = attendanceRecords[date] || [];
-
-            students.forEach(student => {
-                // Find existing status or default to Presente
-                const prev = existingRecord.find(r => r.id === student.id);
-                const currentStatus = prev ? prev.status : 'Presente';
-
-                const tr = document.createElement('tr');
-                tr.className = "hover:bg-slate-50/80 transition-colors";
-                tr.innerHTML = `
-                    <td class="py-3 px-4 font-mono font-bold text-slate-700">${student.id}</td>
-                    <td class="py-3 px-4 text-slate-900 font-semibold">${student.name}</td>
-                    <td class="py-3 px-4">
-                        <div class="flex items-center justify-center gap-1.5 sm:gap-3">
-                            <label class="cursor-pointer">
-                                <input type="radio" name="status_${student.id}" value="Presente" ${currentStatus === 'Presente' ? 'checked' : ''} class="peer sr-only">
-                                <span class="px-2.5 py-1.5 rounded-xl border border-slate-300 text-slate-600 text-xs font-bold peer-checked:bg-emerald-500 peer-checked:text-white peer-checked:border-emerald-500 peer-checked:shadow-md transition-all flex items-center gap-1">
-                                    <i class="fas fa-check text-xs"></i> Presente
-                                </span>
-                            </label>
-                            <label class="cursor-pointer">
-                                <input type="radio" name="status_${student.id}" value="Tardanza" ${currentStatus === 'Tardanza' ? 'checked' : ''} class="peer sr-only">
-                                <span class="px-2.5 py-1.5 rounded-xl border border-slate-300 text-slate-600 text-xs font-bold peer-checked:bg-amber-500 peer-checked:text-white peer-checked:border-amber-500 peer-checked:shadow-md transition-all flex items-center gap-1">
-                                    <i class="fas fa-clock text-xs"></i> Tardanza
-                                </span>
-                            </label>
-                            <label class="cursor-pointer">
-                                <input type="radio" name="status_${student.id}" value="Ausente" ${currentStatus === 'Ausente' ? 'checked' : ''} class="peer sr-only">
-                                <span class="px-2.5 py-1.5 rounded-xl border border-slate-300 text-slate-600 text-xs font-bold peer-checked:bg-rose-500 peer-checked:text-white peer-checked:border-rose-500 peer-checked:shadow-md transition-all flex items-center gap-1">
-                                    <i class="fas fa-times text-xs"></i> Ausente
-                                </span>
-                            </label>
-                        </div>
-                    </td>
-                `;
-                tbody.appendChild(tr);
-            });
-        }
-
-        function quickSetAll(status) {
-            students.forEach(student => {
-                const radio = document.querySelector(`input[name="status_${student.id}"][value="${status}"]`);
-                if (radio) radio.checked = true;
-            });
-        }
-
-        function handleSaveAttendance(e) {
-            e.preventDefault();
-            const date = document.getElementById('markDateInput').value;
-
-            if (!date) {
-                showToast('Seleccione una fecha válida', 'warning');
-                return;
-            }
-
-            if (students.length === 0) {
-                showToast('No hay estudiantes para registrar asistencia', 'warning');
-                return;
-            }
-
-            const dailyRecord = students.map(student => {
-                const selectedRadio = document.querySelector(`input[name="status_${student.id}"]:checked`);
-                return {
-                    id: student.id,
-                    name: student.name,
-                    status: selectedRadio ? selectedRadio.value : 'Presente'
-                };
-            });
-
-            attendanceRecords[date] = dailyRecord;
-            saveAttendanceToStorage();
-            showToast(`Asistencia guardada para el ${date}`, 'success');
-        }
-
-        // --- 3. VER LISTADO & STATS SECTION ---
-        function renderHistoryTable() {
-            const date = document.getElementById('historyDateInput').value;
-            const tbody = document.getElementById('historyTbody');
-            tbody.innerHTML = '';
-
-            const record = attendanceRecords[date] || [];
-
-            let countPresent = 0;
-            let countLate = 0;
-            let countAbsent = 0;
-
-            if (record.length === 0) {
-                tbody.innerHTML = `
-                    <tr>
-                        <td colspan="3" class="py-8 text-center text-slate-400 font-medium">
-                            <i class="fas fa-folder-open text-3xl mb-2 block"></i>
-                            No existen registros de asistencia para la fecha seleccionada (${date}).
-                        </td>
-                    </tr>
-                `;
-            } else {
-                record.forEach(item => {
-                    let badgeMarkup = '';
-                    if (item.status === 'Presente') {
-                        countPresent++;
-                        badgeMarkup = `<span class="px-3 py-1 bg-emerald-100 text-emerald-800 border border-emerald-300 rounded-full text-xs font-bold inline-flex items-center gap-1"><i class="fas fa-check-circle"></i> Presente</span>`;
-                    } else if (item.status === 'Tardanza') {
-                        countLate++;
-                        badgeMarkup = `<span class="px-3 py-1 bg-amber-100 text-amber-800 border border-amber-300 rounded-full text-xs font-bold inline-flex items-center gap-1"><i class="fas fa-clock"></i> Tardanza</span>`;
-                    } else {
-                        countAbsent++;
-                        badgeMarkup = `<span class="px-3 py-1 bg-rose-100 text-rose-800 border border-rose-300 rounded-full text-xs font-bold inline-flex items-center gap-1"><i class="fas fa-times-circle"></i> Ausente</span>`;
-                    }
-
-                    const tr = document.createElement('tr');
-                    tr.className = "hover:bg-slate-50/80 transition-colors";
-                    tr.innerHTML = `
-                        <td class="py-3 px-4 font-mono font-bold text-slate-700">${item.id}</td>
-                        <td class="py-3 px-4 text-slate-900 font-semibold">${item.name}</td>
-                        <td class="py-3 px-4 text-center">${badgeMarkup}</td>
-                    `;
-                    tbody.appendChild(tr);
-                });
-            }
-
-            // Update stats counter cards
-            document.getElementById('statPresent').textContent = countPresent;
-            document.getElementById('statLate').textContent = countLate;
-            document.getElementById('statAbsent').textContent = countAbsent;
-        }
-    </script>
 </body>
 </html>
